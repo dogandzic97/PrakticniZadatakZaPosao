@@ -1,0 +1,68 @@
+﻿@model IEnumerable<Products.Proizvod>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Spisak Proizvoda</h2>
+
+<p>
+    <a href="~/Proizvod/Create" class="btn btn-info">Kreiraj proizvod</a>    
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Naziv)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Opis)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Kategorija)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Proizvodjac)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Dobavljac)
+        </th>
+        <th>
+            @Html.DisplayName("Cena u dinarima")
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    using (@Html.BeginForm("Delete", "Proizvod", new { id = item.ID }))
+    {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Naziv)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Opis)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Kategorija)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Proizvodjac)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Dobavljac)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cena)
+        </td>
+        <td>
+            @Html.ActionLink("Izmeni proizvod", "Edit", new { id = item.ID }) |
+         
+            <input type="submit" value="Briši proizvod" onclick="return confirm('Da li ste sigurni da zelite da izbrisete @item.Naziv')" >
+            
+        </td>
+    </tr>
+
+    }
+}
+
+</table>
